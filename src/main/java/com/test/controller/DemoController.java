@@ -30,17 +30,31 @@ public class DemoController {
     JdbcTemplate jdbcTemplate;
 
     @RequestMapping(value = "/hello", method = RequestMethod.GET)
-    public String hello(@RequestParam(value = "id", required = true) Integer id) {
+    public String hello(@RequestParam(value = "id", required = true) String id) {
         String name = getNameById(id);
         return (name == null) ? "Hello World" : ("Hello " + name);
     }
 
-    public String getNameById(Integer id) {
-        String sql = "select node_type from node where id = ? ";
+    @RequestMapping(value = "/update", method = RequestMethod.GET)
+    public String update(@RequestParam(value = "id", required = true) String id) {
+        String name = updateData(id);
+        return (name == null) ? "Hello World" : ("Hello " + name);
+    }
+
+    public String getNameById(String id) {
+        String sql = "select id from node where id = ? ";
         logger.info("SQL ： " + sql);
         List<String> list = jdbcTemplate.queryForList(sql, new Object[] {id}, String.class);
         logger.info("数据为 ： " + list.toString());
         return list.isEmpty() ? null : list.get(0);
+    }
+
+    public String updateData(String id) {
+        String sql = "update invest set money  = money +1 where id = " + id;
+        logger.info("SQL ： " + sql);
+        int resInt = jdbcTemplate.update(sql);
+        logger.info("修改状态 ： " + resInt);
+        return "修改状态" + resInt;
     }
 
 }
