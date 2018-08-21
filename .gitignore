@@ -1,13 +1,4 @@
 # Created by .ignore support plugin (hsz.mobi)
-.gitignore
-.idea/compiler.xml
-.idea/copyright/
-.idea/encodings.xml
-.idea/inspectionProfiles/
-.idea/libraries/
-.idea/markdown-navigator/
-.idea/misc.xml
-.idea/modules.xml
-.idea/workspace.xml
 spring-boot-jdbc-druid.iml
 target/
+.idea
